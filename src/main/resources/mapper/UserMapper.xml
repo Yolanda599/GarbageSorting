@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC
+        "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.javaclimb.test.dao.UserMapper">
+    <resultMap id="BaseResultMap" type="com.javaclimb.test.domain.User" >
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="username" jdbcType="VARCHAR" property="username"/>
+        <result column="password" jdbcType="VARCHAR" property="password"/>
+        <result column="sex" jdbcType="TINYINT" property="sex"/>
+        <result column="pic" jdbcType="VARCHAR" property="pic"/>
+        <result column="birth" jdbcType="TIMESTAMP" property="birth"/>
+        <result column="location" jdbcType="VARCHAR" property="location"/>
+        <result column="contact" jdbcType="VARCHAR" property="contact"/>
+        <result column="times" jdbcType="INTEGER" property="times"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,name,username,password,sex,pic,birth,location,contact,times
+    </sql>
+
+    <insert id="insert" parameterType="com.javaclimb.test.domain.User">
+        insert into user
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="name != null">
+                name,
+            </if>
+            <if test="username != null">
+                username,
+            </if>
+            <if test="password != null">
+                password,
+            </if>
+            <if test="sex != null">
+                sex,
+            </if>
+            <if test="pic != null">
+                pic,
+            </if>
+            <if test="birth != null">
+                birth,
+            </if>
+            <if test="location != null">
+                location,
+            </if>
+            <if test="contact != null">
+                contact,
+            </if>
+            <if test="times != null">
+                times,
+            </if>
+        </trim>
+        <trim prefix=" values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id},
+            </if>
+            <if test="name != null">
+                #{name},
+            </if>
+            <if test="username != null">
+                #{username},
+            </if>
+            <if test="password != null">
+                #{password},
+            </if>
+            <if test="sex != null">
+                #{sex},
+            </if>
+            <if test="pic != null">
+                #{pic},
+            </if>
+            <if test="birth != null">
+                #{birth},
+            </if>
+            <if test="location != null">
+                #{location},
+            </if>
+            <if test="contact != null">
+                #{contact},
+            </if>
+            <if test="times != null">
+                #{times},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="update" parameterType="com.javaclimb.test.domain.User">
+        update user
+        <set>
+            <if test="name != null">
+                name = #{name},
+            </if>
+            <if test="username != null">
+                username = #{username},
+            </if>
+            <if test="password != null">
+                password = #{password},
+            </if>
+            <if test="sex != null">
+                sex = #{sex},
+            </if>
+            <if test="pic != null">
+                pic = #{pic},
+            </if>
+            <if test="birth != null">
+                birth = #{birth},
+            </if>
+            <if test="location != null">
+                location = #{location},
+            </if>
+            <if test="contact != null">
+                contact = #{contact},
+            </if>
+            <if test="times != null">
+                times = #{times},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <delete id="delete" parameterType="java.lang.Integer">
+        delete from user
+        where id=#{id}
+    </delete>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from user
+        where id=#{id}
+    </select>
+
+    <select id="allUser" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from user
+    </select>
+
+    <select id="userOfName" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+        <include refid="Base_Column_List"/>
+        from user
+        where name like #{name}
+    </select>
+
+    <select id="userOfSex" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from user
+        where sex = #{sex}
+    </select>
+</mapper>
